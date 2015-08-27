@@ -1,7 +1,6 @@
 package parf.by.light;
 
 import com.pi4j.io.gpio.*;
-import com.pi4j.io.gpio.impl.GpioControllerImpl;
 
 /**
  * Created by parf on 28.8.15.
@@ -10,7 +9,7 @@ public class Runner {
     public static void main(String [] args) throws InterruptedException{
 
         System.out.println("<--PI4J--> GPIO Control Example ... started.");
-        final GpioController gpio = new GpioFactory.getInstance();
+        final GpioController gpio = GpioFactory.getInstance();
         final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "MyLED", PinState.HIGH);
         pin.setShutdownOptions(true, PinState.LOW);
         System.out.println("--> GPIO state should be: ON");
