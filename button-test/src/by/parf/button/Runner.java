@@ -17,7 +17,7 @@ public class Runner {
         button.addListener(new GpioPinListenerDigital() {
             @Override
             public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
-                System.out.print("--> GPIO PIN STATE CHANGE: " + event.getPin() + event.getState());
+                System.out.println("--> GPIO PIN STATE CHANGE: " + event.getPin() + event.getState());
             }
         });
 
