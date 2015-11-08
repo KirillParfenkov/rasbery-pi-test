@@ -15,6 +15,10 @@ public class Runner {
         final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "MyLED", PinState.HIGH);
         pin.setShutdownOptions(true, PinState.LOW);
 
+
+        final GpioPinAnalogOutput analogOutput = gpio.provisionAnalogOutputPin(RaspiPin.GPIO_15);
+
+
         Scanner scanner = new Scanner(System.in);
         String command;
         while (true) {
@@ -26,6 +30,12 @@ public class Runner {
 
             if (command.equals("high")) {
                 pin.high();
+            }
+
+            if (command.contains("set")) {
+                int val = Integer.valueOf(command.substring(3));
+                System.out.println("set - " + val);
+                analogOutput.setValue(val/1000);
             }
 
             if (command.equals("exit")) {
