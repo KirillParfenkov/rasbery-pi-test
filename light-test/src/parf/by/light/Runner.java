@@ -2,6 +2,8 @@ package parf.by.light;
 
 import com.pi4j.io.gpio.*;
 
+import java.util.Scanner;
+
 /**
  * Created by parf on 28.8.15.
  */
@@ -12,7 +14,28 @@ public class Runner {
         final GpioController gpio = GpioFactory.getInstance();
         final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "MyLED", PinState.HIGH);
         pin.setShutdownOptions(true, PinState.LOW);
-        System.out.println("--> GPIO state should be: ON");
+
+        Scanner scanner = new Scanner(System.in);
+        String command;
+        while (true) {
+            command = scanner.nextLine();
+
+            if (command.equals("low")) {
+                pin.low();
+            }
+
+            if (command.equals("high")) {
+                pin.high();
+            }
+
+            if (command.equals("exit")) {
+                gpio.shutdown();
+                break;
+            }
+        }
+
+
+        /*System.out.println("--> GPIO state should be: ON");
 
         Thread.sleep(5000);
 
@@ -34,6 +57,7 @@ public class Runner {
         System.out.println("--> GPIO state should be: ON for only 1 second");
         pin.pulse(1000, true); // set second argument to 'true' use a blocking call
 
-        gpio.shutdown();
+        gpio.shutdown(); */
     }
+
 }
